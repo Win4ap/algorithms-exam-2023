@@ -32,7 +32,7 @@ jobs:
 
         # -jobname=<name> дает возможность поменять имя выходного файла
 
-        args: -jobname=my_doc -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+        args: -jobname=algoСolloquium -pdf -file-line-error -halt-on-error -interaction=nonstopmode
 
         compiler: latexmk
 
@@ -46,7 +46,7 @@ jobs:
 
         # Это значение используется как ключ в хранилище
 
-        name: my_doc
+        name: algoСolloquium
 
         # Путь до собранного pdf. Может содержать «*», «**»
 
