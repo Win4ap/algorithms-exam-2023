@@ -54,6 +54,8 @@ jobs:
     # Можно зависеть от любого другого job. Порядок выполнения будет подстраиваться.
 
     needs: [build]
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v3
