@@ -87,7 +87,7 @@ jobs:
       - name: Create a Release
         uses: elgohr/Github-Release-Action@v5
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         with:
           title: questions answers pdf
           tag_name: algoColloquium-${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha8 }}
@@ -95,13 +95,9 @@ jobs:
       # Прикладываемые файлы надо заливать отдельным step
 
       - name: Upload pdf asset
-
         uses: softprops/action-gh-release@v1
-
-        env:
-          # Тоже требуется токен
-
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
         with:
           files: ./algoColloquium.pdf
+        env:
+          # Тоже требуется токен
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
