@@ -60,51 +60,21 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       # Это хак, чтобы дергать bash-команды и запоминанать их результат
-
       - name: Variables
-
-        # id используется внутренне: по нему можно ссылаться на результаты из другого step
-
         id: vars
-
-        # echo в таком форматировании позволит впоследствии ссылаться на результаты через ${{ steps.<step_id>.outputs.<variable_name> }}
-
-        # Вертикальная черта | — это специальный символ yaml. Означает, что дальше идет массив команд и их все надо выполнить
-
         run: |
-
           echo «::set-output name=date::$(date +'%Y-%m-%d')»
           echo «::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)»
 
       - name: Download artifacts
-
         uses: actions/download-artifact@v2
-
         with:
-          # Тот самый ключ, который мы указывали в upload-artifact
-
           name: algoColloquium
 
       - name: Create a Release
-        uses: actions/create-release@v1
-
-        id: create_release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v1
         with:
-          release_name: algoColloquium-${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha8 }}
-          allowUpdates: true
+          name: algoColloquium
           tag_name: release
-
-      # Прикладываемые файлы надо заливать отдельным step
-
-      - name: Upload pdf asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./algoColloquium.pdf
-          # Имя, которое будет высвечиваться в релизе
-          asset_name: algoColloquium.pdf
-          asset_content_type: application/pdf
+          files: algoColloquium.pdf
+          prerelease: false
