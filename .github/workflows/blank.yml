@@ -89,8 +89,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         with:
-          title: questions answers pdf
-          tag_name: algoColloquium-${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha8 }}
+          title: algoColloquium-${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha8 }}
 
       # Прикладываемые файлы надо заливать отдельным step
 
@@ -100,4 +99,4 @@ jobs:
           files: ./algoColloquium.pdf
         env:
           # Тоже требуется токен
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
