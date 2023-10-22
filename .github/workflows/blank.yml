@@ -17,7 +17,7 @@ jobs:
 
       - name: Build document
 
-        uses: xu-cheng/latex-action@v2
+        uses: dante-ev/latex-action@latest
 
         with:
           # Переименуйте, если у вас другой файл
@@ -60,6 +60,7 @@ jobs:
     needs: [build]
 
     steps:
+      - uses: actions/checkout@v3
       # Это хак, чтобы дергать bash-команды и запоминанать их результат
 
       - name: Variables
@@ -87,39 +88,19 @@ jobs:
 
           name: algoColloquium
 
-      - name: Create Release
-
-        uses: actions/create-release@v1
-
-        id: create_release
-
+      - name: Create a Release
+        uses: elgohr/Github-Release-Action@v5
         env:
-          # По офф.документации, надо указать GITHUB_TOKEN
-
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions
-
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         with:
-          # Берем результат из step с id=vars (см. выше).
-
-          # Получим теги вида “my_doc-<дата билда>-<первые 8 символов из sha коммита>
-
-          tag_name: my_doc-${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha8 }}
-
-          # Имя, которое будет высвечиваться в релизе
-
-          release_name: My Actions document (version ${{ steps.vars.outputs.date }})
-
-          # Наш релиз не набросок и не пререлиз, так что оба в false
-
-          draft: false
-
-          prerelease: false
+          title: questions answers pdf
+          tag_name: algoColloquium-${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha8 }}
 
       # Прикладываемые файлы надо заливать отдельным step
 
       - name: Upload pdf asset
 
-        uses: actions/upload-release-asset@v1
+        uses: softprops/action-gh-release@v1
 
         env:
           # Тоже требуется токен
@@ -127,16 +108,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
         with:
-          # Из предыдущего step с id=create_release генерится upload_url — по нему и надо заливать
-
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-
-          # Не переходим в папку latex_sources, поскольку download-artifacts грузит в текущую директорию
-
-          asset_path: ./algoColloquium.pdf
-
-          # Имя, которое будет высвечиваться в релизе
-
-          asset_name: algoColloquium.pdf
-
-          asset_content_type: application/pdf
+          files: ./algoColloquium.pdf
