@@ -90,10 +90,10 @@
 
           # Не переходим в папку latex_sources, поскольку download-artifacts грузит в текущую директорию
 
-          asset_path: ./my_doc.pdf
+          asset_path: ./algoСolloquium.pdf
 
           # Имя, которое будет высвечиваться в релизе
 
-          asset_name: my_asset_name.pdf
+          asset_name: algoСolloquium.pdf
 
           asset_content_type: application/pdf
