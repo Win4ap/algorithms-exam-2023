@@ -40,7 +40,7 @@
 
           # Тот самый ключ, который мы указывали в upload-artifact
 
-          name: my_doc
+          name: algoСolloquium
 
       - name: Create Release
 
