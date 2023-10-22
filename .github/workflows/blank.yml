@@ -51,10 +51,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    # Деплой будет только на ветке master. Закомментируйте, если не надо
-
-    if: github.ref == 'refs/heads/master'
-
     # Можно зависеть от любого другого job. Порядок выполнения будет подстраиваться.
 
     needs: [build]
