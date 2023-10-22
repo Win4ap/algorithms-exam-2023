@@ -6,6 +6,8 @@
 
     if: github.ref == 'refs/heads/master'
 
+    on: push
+
     # Можно зависеть от любого другого job. Порядок выполнения будет подстраиваться.
 
     needs: [build]
