@@ -85,18 +85,24 @@ jobs:
           name: algoColloquium
 
       - name: Create a Release
-        uses: elgohr/Github-Release-Action@v5
+        uses: actions/create-release@v1
+
+        id: create_release
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          title: algoColloquium-${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha8 }}
+          tag_name: algoColloquium-${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha8 }}
+          release_name: algoColloquium-${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha8 }}
 
       # Прикладываемые файлы надо заливать отдельным step
 
       - name: Upload pdf asset
-        uses: softprops/action-gh-release@v1
-        with:
-          files: ./algoColloquium.pdf
+        uses: actions/upload-release-asset@v1
         env:
-          # Тоже требуется токен
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./algoColloquium.pdf
+          # Имя, которое будет высвечиваться в релизе
+          asset_name: algoColloquium.pdf
+          asset_content_type: application/pdf
