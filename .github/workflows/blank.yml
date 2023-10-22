@@ -4,67 +4,62 @@ on: push
 
 jobs:
   build:
-
     # Базовая ОС, на которой будут исполняться команды. Оставим ubuntu
 
     runs-on: ubuntu-latest
 
     steps:
+      # Необходимо использовать этот action, чтобы получить содержимое репо
 
-    # Необходимо использовать этот action, чтобы получить содержимое репо
+      - uses: actions/checkout@v2
 
-    - uses: actions/checkout@v2
+      # Компилируем документ
 
-    # Компилируем документ
+      - name: Build document
 
-    - name: Build document
+        uses: xu-cheng/latex-action@v2
 
-      uses: xu-cheng/latex-action@v2
+        with:
+          # Переименуйте, если у вас другой файл
 
-      with:
+          root_file: questions.latex
 
-        # Переименуйте, если у вас другой файл
+          # Аргументы, к которыми запускать компилятор (latexmk)
 
-        root_file: questions.latex
+          # -jobname=<name> дает возможность поменять имя выходного файла
 
-        # Аргументы, к которыми запускать компилятор (latexmk)
+          args: -jobname=algoColloquium -pdf -file-line-error -halt-on-error -interaction=nonstopmode
 
-        # -jobname=<name> дает возможность поменять имя выходного файла
+          compiler: latexmk
 
-        args: -jobname=algoСolloquium -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+      # Загружаем собранные pdf-файлы
 
-        compiler: latexmk
+      - name: Upload pdf document
 
-    # Загружаем собранные pdf-файлы
+        uses: actions/upload-artifact@v2
 
-    - name: Upload pdf document
+        with:
+          # Это значение используется как ключ в хранилище
 
-      uses: actions/upload-artifact@v2
+          name: algoColloquium
 
-      with:
+          # Путь до собранного pdf. Может содержать «*», «**»
 
-        # Это значение используется как ключ в хранилище
+          # Здесь это <working_directory>/<jobname>.pdf
 
-        name: algoСolloquium
-
-        # Путь до собранного pdf. Может содержать «*», «**»
-
-        # Здесь это <working_directory>/<jobname>.pdf
-
-        path: algoСolloquium.pdf
+          path: algoColloquium.pdf
   deploy:
     runs-on: ubuntu-latest
 
     # Деплой будет только на ветке master. Закомментируйте, если не надо
 
     if: github.ref == 'refs/heads/master'
-    
+
     # Можно зависеть от любого другого job. Порядок выполнения будет подстраиваться.
 
     needs: [build]
 
     steps:
-
       # Это хак, чтобы дергать bash-команды и запоминанать их результат
 
       - name: Variables
@@ -88,10 +83,9 @@ jobs:
         uses: actions/download-artifact@v2
 
         with:
-
           # Тот самый ключ, который мы указывали в upload-artifact
 
-          name: algoСolloquium
+          name: algoColloquium
 
       - name: Create Release
 
@@ -100,14 +94,12 @@ jobs:
         id: create_release
 
         env:
-
           # По офф.документации, надо указать GITHUB_TOKEN
 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions
 
         with:
-
-          # Берем результат из step с id=vars (см. выше). 
+          # Берем результат из step с id=vars (см. выше).
 
           # Получим теги вида “my_doc-<дата билда>-<первые 8 символов из sha коммита>
 
@@ -130,23 +122,21 @@ jobs:
         uses: actions/upload-release-asset@v1
 
         env:
-
           # Тоже требуется токен
 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
         with:
-
           # Из предыдущего step с id=create_release генерится upload_url — по нему и надо заливать
 
           upload_url: ${{ steps.create_release.outputs.upload_url }}
 
           # Не переходим в папку latex_sources, поскольку download-artifacts грузит в текущую директорию
 
-          asset_path: ./algoСolloquium.pdf
+          asset_path: ./algoColloquium.pdf
 
           # Имя, которое будет высвечиваться в релизе
 
-          asset_name: algoСolloquium.pdf
+          asset_name: algoColloquium.pdf
 
           asset_content_type: application/pdf
