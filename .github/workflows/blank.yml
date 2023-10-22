@@ -59,6 +59,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: Get current date
+        id: today
+        run: echo "::set-output name=today::$(date +'%Y-%m-%d-%dT%H:%M:%S')"
       # Это хак, чтобы дергать bash-команды и запоминанать их результат
       - name: Variables
         id: vars
@@ -74,7 +77,7 @@ jobs:
       - name: Create a Release
         uses: softprops/action-gh-release@v1
         with:
-          name: algoColloquium
+          name: algo colloquium ${{steps.date.outputs.today}}
           tag_name: release
           files: algoColloquium.pdf
           prerelease: false
