@@ -36,13 +36,13 @@
 Асимптотика - поведение функции при стремлении аргумента к бесконечности.\\
 Пусть $f(n)$ и $g(n)$ - две функции, которые стремяться к бесконечности, тогда:
 \begin{itemize}
-    \item $f(n) = o(g(n))$, если $g$ доминирует над $f$ асимптотически, то есть $\exists(С > 0) \forall N : \forall(n \in N)\ |f(n)| < C|g(n)|$
-    \item $f(n) = \mathcal{O}(g(n))$, если $f$ ограничена сверху функцией $g$ асимптотически, то есть $\exists(С > 0) \forall N : \forall(n \in N)\ |f(n)| \leq C|g(n)|$
+    \item $f(n) = o(g(n))$, если $g$ доминирует над $f$ асимптотически, то есть $\exists (С > 0) \forall N : \forall(n \in N)\ |f(n)| < C|g(n)|$
+    \item $f(n) = \mathcal{O}(g(n))$, если $f$ ограничена сверху функцией $g$ асимптотически, то есть $\exists (С > 0) \forall N : \forall(n \in N)\ |f(n)| \leq C|g(n)|$
     \item $f(n) = \Theta(g(n))$, если $f$ ограничена снизу и сверху функцией 
-    $g$ асимптотически, то есть $\exists(С_{1} > 0), (C_{2} > 0) \ \forall N : \forall(n \in N)\ C_{1}|g(n)| \leq |f(n)| \leq C_{2}|g(n)|$
+    $g$ асимптотически, то есть $\exists (С_{1} > 0), (C_{2} > 0) \ \forall N : \forall(n \in N)\ C_{1}|g(n)| \leq |f(n)| \leq C_{2}|g(n)|$
     \item $f(n) = \Omega(g(n))$, если $f$ ограничена снизу функцией 
-    $g$ асимптотически, то есть $\forall(С > 0) \exists N : \forall(n \in N)\ |f(n)| \geq C|g(n)|$
-    \item $f(n) = \omega(g(n))$, если $f$ доминирует над $g$ асимптотически, то есть $\forall(С > 0) \exists N : \forall(n \in N)\ |f(n)| > C|g(n)|$
+    $g$ асимптотически, то есть $\forall (С > 0) \exists N : \forall(n \in N)\ |f(n)| \geq C|g(n)|$
+    \item $f(n) = \omega(g(n))$, если $f$ доминирует над $g$ асимптотически, то есть $\forall (С > 0) \exists N : \forall(n \in N)\ |f(n)| > C|g(n)|$
 \end{itemize}
 
 Прекрасная лекция на 30-40 минут, в которой эти штуки объясняют в том числе графически, что намного легче для понимания, даже необязательно всё смотреть: \href{https://www.youtube.com/watch?v=dpdimxKMMTc}{\textit{ТЫК}}.
