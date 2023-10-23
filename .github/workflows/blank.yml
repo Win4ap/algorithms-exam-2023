@@ -22,7 +22,7 @@ jobs:
         with:
           # Переименуйте, если у вас другой файл
 
-          root_file: questions.latex
+          root_file: questions.tex
 
           # Аргументы, к которыми запускать компилятор (latexmk)
 
