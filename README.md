@@ -4,6 +4,7 @@ https://docs.google.com/document/d/13JziAjdjoX4xGi9Ba5vflzim79Vp-fWhHWGSwSc5WrA/
 https://1drv.ms/w/s!AjgGg7TYlTsJp2s8sHda4ClE0NeG?e=v2uyAD - билеты от Игоря Бердова
 https://www.overleaf.com/read/rnyryyffvbmw - билеты от Алии Слепцовой  
 https://1drv.ms/x/s!AjgGg7TYlTsJp22eceh1h4OfjCUe?e=UxvMT4 - табличка от Анастасии Тереховой с подсказками где можно найти инфу по некоторым билетам  
+https://1drv.ms/b/s!AjgGg7TYlTsJp3FofCwj6Y3zO7b7?e=hDZNvN - билеты от Таисии Чегодаевой  
 ![be16d555878106ebe7f2f1f728f8b4e6-0](https://github.com/Win4ap/algorithms-exam-2023/assets/143121281/040bc6b0-551d-4d8f-b4f6-ee251a0edaf6)
 ![be16d555878106ebe7f2f1f728f8b4e6-1](https://github.com/Win4ap/algorithms-exam-2023/assets/143121281/11f74361-8d01-4e0d-b4a5-4fbd3cc6cb3c)
 ![be16d555878106ebe7f2f1f728f8b4e6-2](https://github.com/Win4ap/algorithms-exam-2023/assets/143121281/b7983943-9bb5-4f70-a2d8-5618bdf88322)
